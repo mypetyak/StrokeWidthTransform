@@ -32,15 +32,13 @@ solution in Python. To get things rolling, I installed OpenCV with homebrew,
 set up a virtual environment, and symlinked the new OpenCV modules into my
 environment. Note that I'm using Python 2.7 and OpenCV 2.4.12 here on OSX:
 
-{% highlight bash %}
-$ brew tap homebrew/science
-$ brew install opencv
+    $ brew tap homebrew/science
+    $ brew install opencv
 
-$ virtualenv env
-$ cd env/lib/python2.7/site-packages
-$ ln -s /usr/local/Cellar/opencv/2.4.12/lib/python2.7/site-packages/cv.py cv.so
-$ ln -s /usr/local/Cellar/opencv/2.4.12/lib/python2.7/site-packages/cv2.so cv2.so
-{% endhighlight %}
+    $ virtualenv env
+    $ cd env/lib/python2.7/site-packages
+    $ ln -s /usr/local/Cellar/opencv/2.4.12/lib/python2.7/site-packages/cv.py cv.so
+    $ ln -s /usr/local/Cellar/opencv/2.4.12/lib/python2.7/site-packages/cv2.so cv2.so
 
 I have a basic (but slow and disorganized) prototype of SWT implemented at
 [github.com/mypetyak/StrokeWidthTransform](github.com/mypetyak/StrokeWidthTransform).
@@ -55,10 +53,10 @@ to calculate the image gradient. The gradient describes, for each pixel, the
 direction of greatest contrast. In the case of an edge pixel, this is
 synonymous with the vector normal to the edge.
 
-3. For each edge pixel, traverse in the direction \theta of the gradient until the
+3. For each edge pixel, traverse in the direction θ of the gradient until the
 next edge pixel is encountered (or you fall off the image). If the
 corresponding edge pixel's gradient is pointed in the opposite direction
-(\theta - pi), we know the newly-encountered edge is roughly parallel to the
+(θ - π), we know the newly-encountered edge is roughly parallel to the
 first, and we have just cut a slice (line) through a stroke. Record the stroke width,
 in pixels, and assign this value to all pixels on the slice we just traversed.
 
@@ -67,7 +65,7 @@ line widths by assigning all pixels the median stroke width value. This allows
 the two strokes you might encounter in an 'L' shape to be considered with the
 same, most common, stroke width.
 
-5. Connect lines that overlap using a union-find (AKA, disjoint-set) data
+5. Connect lines that overlap using a union-find (disjoint-set) data
 structure, resulting in a disjoint set of all overlapping stroke slices. Each
 set of lines is likely a single letter/character.
 
